@@ -38,7 +38,6 @@ def averageValueFromList(listIn = list()):
 # Read the log/output file of the seperate temperature sensor
 def readSepTempSensor():
     out = 0
-    m = ""
 
     while True:
         file = open(sepTempSensorPath, "r")
