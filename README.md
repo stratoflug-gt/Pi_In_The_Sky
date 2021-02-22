@@ -10,7 +10,7 @@ Software which controls the heating-circuit, featuring different variables adjus
 ------------------------------------------------------------------------------------------------------------------
 
 To download the software use the following command (verify the current working directrory is the root directory):
-  > wget https://raw.githubusercontent.com/stratoflug-gt/Pi_In_The_Sky/main/Heizungssteuerung.py
+  > sudo wget https://raw.githubusercontent.com/stratoflug-gt/Pi_In_The_Sky/main/Heizungssteuerung.py
 
 ------------------------------------------------------------------------------------------------------------------
 
@@ -19,7 +19,7 @@ To test the software complete the following procedure:
 Open Heizungssteuerung.py by typing:
   > sudo nano Heizungssteuerung.py
   
-Then change the variable <testMode> to <True>. Save and exit the document.
+Then change the variable 'testMode' to 'True'. Save and exit the document.
 
 To start the script type:
   > python3 Heizungssteurung.py
