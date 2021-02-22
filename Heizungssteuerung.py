@@ -4,7 +4,8 @@
 # PREDEFINED CODE AND VARIABLES
 
 # Libraries needed for this script: gpiozero, time
-from gpiozero import OutputDevice, CPUTemperature
+from gpiozero import OutputDevice
+from gpiozero import CPUTemperature
 from time import sleep
 
 # Adjustable Variables
@@ -18,7 +19,7 @@ measurementFrequency        = 1                                                 
                                                                                                 # The maximum reaction time (seconds) caused by the averaging logic can be calculated by: 
                                                                                                 # consideredMeasurements/measurementFrequency = reaction time
 
-sepTempSensorPath           = "/sys/bus/w1/devices/28-000009586bf6/w1_slave"                    # File path to w1_slave file of the seperate internal temperature sensor
+sepTempSensorPath           = r"/sys/bus/w1/devices/28-000009586bf6/w1_slave"                    # File path to w1_slave file of the seperate internal temperature sensor
 minSepSensorTemperature     = 0                                                                 # Seperately measured temperature threshold which triggers the heating-circuit (degrees Celcius)
 maxSepSensorTemperature     = 30                                                                # Seperately measured temperature at which the heating will be stopped (degrees Celcius)
 temperatureOffsetSepSensor  = 0                                                                 # Adjust possible temperature offsets
