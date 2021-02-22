@@ -1,10 +1,10 @@
-###### Pi_In_The_Sky
+# Pi_In_The_Sky
 Files associated with the flying pi.
 
-# pits-master: 
+## pits-master: 
 A copy of the Pi-in-the-sky pits-software modified for our use.
 
-# Heizungssteuerung.py:
+## Heizungssteuerung.py:
 Software which controls the heating-circuit, featuring different variables adjustable in the code.
 
 ------------------------------------------------------------------------------------------------------------------
