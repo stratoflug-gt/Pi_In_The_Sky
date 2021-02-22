@@ -1,0 +1,17 @@
+# Build tracker program
+echo Building tracker ...
+cd tracker
+make
+cd ..
+
+echo Copying configuration file ...
+sudo cp -f boot/pisky.txt /boot
+
+echo Enabling startup script.
+sudo cp -f systemd/tracker.service /lib/systemd/system
+sudo systemctl enable tracker.service
+
+echo Starting startup script
+sudo systemctl start tracker.service
+
+echo DONE
