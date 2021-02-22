@@ -1,5 +1,5 @@
 # P-Seminar Stratosphaerenflug, 22 January 2021
-
+# Version 1.2
 
 # PREDEFINED CODE AND VARIABLES
 
@@ -76,6 +76,7 @@ tempValue = readSepTempSensor()
 i = 0
 while i < consideredMeasurements:
     measurementsSepSensor.append(tempValue)
+    i += 1
 
 averageSepSensorValue = tempValue
 
