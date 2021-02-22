@@ -28,7 +28,7 @@ You should now see output including four different temperature values.
 
 ------------------------------------------------------------------------------------------------------------------
 
-In order to enable auto start open the file rc.local by typing:
+In order to enable autostart open the file rc.local by typing:
   > sudo nano /etc/rc.local
 
 Then add the following line to the file:
