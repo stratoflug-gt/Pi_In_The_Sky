@@ -1,5 +1,5 @@
 # P-Seminar Stratosphaerenflug, 22 January 2021
-# Version 1.4
+# Version 1.0
 
 # PREDEFINED CODE AND VARIABLES
 
@@ -18,7 +18,7 @@ measurementFrequency        = 1                                                 
                                                                                                 # The maximum reaction time (seconds) caused by the averaging logic can be calculated by: 
                                                                                                 # consideredMeasurements/measurementFrequency = reaction time
 
-sepTempSensorPath           = r"/sys/bus/w1/devices/28-000009586bf6/w1_slave"                   # File path to w1_slave file of the seperate internal temperature sensor
+sepTempSensorPath           = "/sys/bus/w1/devices/28-000009586bf6/w1_slave"                    # File path to w1_slave file of the seperate internal temperature sensor
 minSepSensorTemperature     = 0                                                                 # Seperately measured temperature threshold which triggers the heating-circuit (degrees Celcius)
 maxSepSensorTemperature     = 30                                                                # Seperately measured temperature at which the heating will be stopped (degrees Celcius)
 temperatureOffsetSepSensor  = 0                                                                 # Adjust possible temperature offsets
@@ -39,11 +39,12 @@ def averageValueFromList(listIn = list()):
 def readSepTempSensor():
     out = 0.0
 
-    file = open(sepTempSensorPath)
+    file = open(sepTempSensorPath, "r")
 
     if file:
         m = file.read()
         out = float(m.split("t=")[1])/1000
+        print("Read value: ", out, " from w1_slave\n")
         file.close()
     else:
         print("Error: Failed to open w1_slave!\n")
