@@ -37,15 +37,18 @@ def averageValueFromList(listIn = list()):
 
 # Read the log/output file of the seperate temperature sensor
 def readSepTempSensor():
-    out = 0.0
+    out = -1
 
     file = open(sepTempSensorPath, "r")
 
     if file:
         m = file.read()
-        out = float(m.split("t=")[1])/1000
-        print("Read value: ", out, " from w1_slave\n")
         file.close()
+        
+        if len(m.split("t=")) > 1:
+            out = float(m.split("t=")[1])/1000
+
+        print("Read value: ", out, " from w1_slave\n")
     else:
         print("Error: Failed to open w1_slave!\n")
 
