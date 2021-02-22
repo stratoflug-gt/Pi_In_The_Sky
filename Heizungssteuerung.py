@@ -106,7 +106,7 @@ while True:
 
     # Turn the heating-cicuit on, if the average SOC temperature sinks below the defined minimum temperature
     # There should be a ~3.3V difference between the GPIO-Pin and a Ground-Pin on the Pi-board
-    if averageSOCTemperature <= minSOCTemperature + temperattemperatureOffsetSOC:
+    if averageSOCTemperature <= minSOCTemperature + temperatureOffsetSOC:
         gpioPin.on()
         print("Heating-Circuit on: minSOCTemperature\n")
 
@@ -118,7 +118,7 @@ while True:
     
     # Turn the heating-circuit off, if the average SOC temperature rises above the defined deactivation temperature
     # There should be no or only a small voltage difference between the GPIO-Pin and a Ground-Pin on the Pi-board
-    if averageSOCTemperature >= maxSOCTemperature + temperattemperatureOffsetSOC:
+    if averageSOCTemperature >= maxSOCTemperature + temperatureOffsetSOC:
         gpioPin.off()
         print("Heating-Circuit off: maxSOCTemperature\n")
 
