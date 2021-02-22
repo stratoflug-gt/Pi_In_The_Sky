@@ -5,9 +5,9 @@ Files associated with the flying pi.
 A copy of the Pi-in-the-sky pits-software modified for our use.
 
 # Heizungssteuerung.py:
-Software which controls the heating-circuit, featuring different variables adjustable in the code.\n 
+Software which controls the heating-circuit, featuring different variables adjustable in the code.
 
-To download the software use the following command (verify the current working directrory is the root directory):\n
+To download the software use the following command (verify the current working directrory is the root directory):
   wget https://raw.githubusercontent.com/stratoflug-gt/Pi_In_The_Sky/main/Heizungssteuerung.py
 
 To test the software complete the following procedure:
