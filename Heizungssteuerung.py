@@ -14,13 +14,13 @@ temperatureOffsetSOC        = 0                                                 
 
 usedPinNumber               = 17                                                                # Index of the GPIO-Pin to be used
 consideredMeasurements      = 10                                                                # Amount of measurements averaged in order to compensate for lacking precision/spikes
-measurementFrequency        = 10                                                                # Amount of measurements per second (hertz)
+measurementFrequency        = 1                                                                # Amount of measurements per second (hertz)
                                                                                                 # The maximum reaction time (seconds) caused by the averaging logic can be calculated by: 
                                                                                                 # consideredMeasurements/measurementFrequency = reaction time
 
 sepTempSensorPath           = "/sys/bus/w1/devices/28-000009586bf6/w1_slave"                    # File path to w1_slave file of the seperate internal temperature sensor
-minSepSensorTemperature     = 30                                                                # Seperately measured temperature threshold which triggers the heating-circuit (degrees Celcius)
-maxSepSensorTemperature     = 40                                                                # Seperately measured temperature at which the heating will be stopped (degrees Celcius)
+minSepSensorTemperature     = 0                                                                 # Seperately measured temperature threshold which triggers the heating-circuit (degrees Celcius)
+maxSepSensorTemperature     = 10                                                                # Seperately measured temperature at which the heating will be stopped (degrees Celcius)
 temperatureOffsetSepSensor  = 0                                                                 # Adjust possible temperature offsets
 
 # Predefined functions
@@ -37,20 +37,25 @@ def averageValueFromList(listIn = list()):
 
 # Read the log/output file of the seperate temperature sensor
 def readSepTempSensor():
-    out = -1
+    out = 0
+    m = ""
 
-    file = open(sepTempSensorPath, "r")
+    while True:
+        file = open(sepTempSensorPath, "r")
 
-    if file:
-        m = file.read()
-        file.close()
-        
-        if len(m.split("t=")) > 1:
-            out = float(m.split("t=")[1])/1000
+        if file:
+            m = file.read()
+            file.close()
 
-        print("Read value: ", out, " from w1_slave\n")
-    else:
-        print("Error: Failed to open w1_slave!\n")
+            if len(m.split("t=")) > 1:
+                out = float(m.split("t=")[1])/1000
+                break
+            else:
+                sleep(0.2)
+        else:
+            print("Error: Failed to open w1_slave!\n")
+
+    print("Read value: ", out, " from w1_slave\n")
 
     return out
 
