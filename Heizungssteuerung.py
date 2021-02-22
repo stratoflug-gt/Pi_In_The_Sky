@@ -52,7 +52,7 @@ def readSepTempSensor():
 
 
 # PROGRAM CODE
-print("Heizungssteuerung startet...\n")
+print("Heating-Circuit software starting...\n")
 
 # Retrieve handles to the temperature sensor and the GPIO-Pin
 gpioPin = OutputDevice(usedPinNumber)                      
@@ -80,7 +80,7 @@ while i < consideredMeasurements:
 averageSepSensorValue = tempValue
 
 # Heating routine
-print("Heizungssoftware laeuft...\n")
+print("Heating-Circuit software running...\n")
 
 i = 0
 while True:
@@ -106,25 +106,25 @@ while True:
     # There should be a ~3.3V difference between the GPIO-Pin and a Ground-Pin on the Pi-board
     if averageSOCTemperature <= minSOCTemperature + temperattemperatureOffsetSOC:
         gpioPin.on()
-        print("Heizung an: minSOCTemperature\n")
+        print("Heating-Circuit on: minSOCTemperature\n")
 
     # Turn the heating-cicuit on, if the average seperate sensor temperature sinks below the defined minimum temperature
     # There should be a ~3.3V difference between the GPIO-Pin and a Ground-Pin on the Pi-board
     if averageSepSensorValue <= minSepSensorTemperature + temperatureOffsetSepSensor:
         gpioPin.on()
-        print("Heizung an: minSepSensorTemperature\n")
+        print("Heating-Circuit on: minSepSensorTemperature\n")
     
     # Turn the heating-circuit off, if the average SOC temperature rises above the defined deactivation temperature
     # There should be no or only a small voltage difference between the GPIO-Pin and a Ground-Pin on the Pi-board
     if averageSOCTemperature >= maxSOCTemperature + temperattemperatureOffsetSOC:
         gpioPin.off()
-        print("Heizung aus: maxSOCTemperature\n")
+        print("Heating-Circuit off: maxSOCTemperature\n")
 
     # Turn the heating-circuit off, if the average seperate sensor temperature rises above the defined deactivation temperature
     # There should be no or only a small voltage difference between the GPIO-Pin and a Ground-Pin on the Pi-board
     if averageSepSensorValue >= maxSepSensorTemperature + temperatureOffsetSepSensor:
         gpioPin.off()
-        print("Heizung aus: maxSepSensorTemperature\n")
+        print("Heating-Circuit off: maxSepSensorTemperature\n")
 
     # Pause until next measurement
     sleep(1/measurementFrequency)
