@@ -13,7 +13,7 @@ To download the software use the following command (verify the current working d
 To test the software complete the following procedure:
 
 Open Heizungssteuerung.py by typing:
-  sudo nano Heizungssteuerung.py
+  > sudo nano Heizungssteuerung.py
   
 Then change the variable "testMode" to "True". Save and exit the document.
 
