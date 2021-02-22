@@ -19,7 +19,7 @@ To test the software complete the following procedure:
 Open Heizungssteuerung.py by typing:
   > sudo nano Heizungssteuerung.py
   
-Then change the variable **testMode** to **True**. Save and exit the document.
+Then change the variable _**testMode**_ to _**True**_. Save and exit the document.
 
 To start the script type:
   > python3 Heizungssteurung.py
