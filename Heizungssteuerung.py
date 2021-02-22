@@ -1,5 +1,5 @@
 # P-Seminar Stratosphaerenflug, 22 January 2021
-# Version 1.0
+# Version 1.1
 
 # PREDEFINED CODE AND VARIABLES
 
@@ -14,7 +14,7 @@ temperatureOffsetSOC        = 0                                                 
 
 usedPinNumber               = 17                                                                # Index of the GPIO-Pin to be used
 consideredMeasurements      = 10                                                                # Amount of measurements averaged in order to compensate for lacking precision/spikes
-measurementFrequency        = 1                                                                # Amount of measurements per second (hertz)
+measurementFrequency        = 1                                                                 # Amount of measurements per second (hertz)
                                                                                                 # The maximum reaction time (seconds) caused by the averaging logic can be calculated by: 
                                                                                                 # consideredMeasurements/measurementFrequency = reaction time
 
@@ -22,6 +22,8 @@ sepTempSensorPath           = "/sys/bus/w1/devices/28-000009586bf6/w1_slave"    
 minSepSensorTemperature     = 0                                                                 # Seperately measured temperature threshold which triggers the heating-circuit (degrees Celcius)
 maxSepSensorTemperature     = 10                                                                # Seperately measured temperature at which the heating will be stopped (degrees Celcius)
 temperatureOffsetSepSensor  = 0                                                                 # Adjust possible temperature offsets
+
+testMode                    = False                                                             # Enable/Disable commandline output                         
 
 # Predefined functions
 # Average all given values in the list
@@ -52,9 +54,11 @@ def readSepTempSensor():
             else:
                 sleep(0.2)
         else:
-            print("Error: Failed to open w1_slave!\n")
+            if testMode:
+                print("Error: Failed to open w1_slave!\n")
 
-    print("Read value: ", out, " from w1_slave\n")
+    if testMode:
+        print("Read value: ", out, " from w1_slave\n")
 
     return out
 
@@ -97,13 +101,15 @@ while True:
     measurementsSOC[i] = tempSensSOC.temperature
     averageSOCTemperature = averageValueFromList(measurementsSOC)
 
-    print("AverageSOCTemperature: ", averageSOCTemperature, "°C\n")
+    if testMode:
+        print("AverageSOCTemperature: ", averageSOCTemperature, "°C\n")
 
     # Include new seperate sensor measurement and calculate averageTemperature
     measurementsSepSensor[i] = readSepTempSensor()
     averageSepSensorTemperature = averageValueFromList(measurementsSepSensor)
 
-    print("AverageSepSensorTemperature: ", averageSepSensorTemperature, "°C\n")
+    if testMode:
+        print("AverageSepSensorTemperature: ", averageSepSensorTemperature, "°C\n")
 
     # Increase/reset i
     i += 1
@@ -115,25 +121,33 @@ while True:
     # There should be a ~3.3V difference between the GPIO-Pin and a Ground-Pin on the Pi-board
     if averageSOCTemperature <= minSOCTemperature + temperatureOffsetSOC:
         gpioPin.on()
-        print("Heating-Circuit on: minSOCTemperature\n")
+
+        if testMode:
+            print("Heating-Circuit on: minSOCTemperature\n")
 
     # Turn the heating-cicuit on, if the average seperate sensor temperature sinks below the defined minimum temperature
     # There should be a ~3.3V difference between the GPIO-Pin and a Ground-Pin on the Pi-board
     if averageSepSensorTemperature <= minSepSensorTemperature + temperatureOffsetSepSensor:
         gpioPin.on()
-        print("Heating-Circuit on: minSepSensorTemperature\n")
+
+        if testMode:
+            print("Heating-Circuit on: minSepSensorTemperature\n")
     
     # Turn the heating-circuit off, if the average SOC temperature rises above the defined deactivation temperature
     # There should be no or only a small voltage difference between the GPIO-Pin and a Ground-Pin on the Pi-board
     if averageSOCTemperature >= maxSOCTemperature + temperatureOffsetSOC:
         gpioPin.off()
-        print("Heating-Circuit off: maxSOCTemperature\n")
+
+        if testMode:
+            print("Heating-Circuit off: maxSOCTemperature\n")
 
     # Turn the heating-circuit off, if the average seperate sensor temperature rises above the defined deactivation temperature
     # There should be no or only a small voltage difference between the GPIO-Pin and a Ground-Pin on the Pi-board
     if averageSepSensorTemperature >= maxSepSensorTemperature + temperatureOffsetSepSensor:
         gpioPin.off()
-        print("Heating-Circuit off: maxSepSensorTemperature\n")
+
+        if testMode:
+            print("Heating-Circuit off: maxSepSensorTemperature\n")
 
     # Pause until next measurement
     sleep(1/measurementFrequency)
