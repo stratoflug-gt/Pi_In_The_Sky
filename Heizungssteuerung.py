@@ -1,5 +1,5 @@
 # P-Seminar Stratosphaerenflug, 22 January 2021
-# Version 1.3
+# Version 1.4
 
 # PREDEFINED CODE AND VARIABLES
 
@@ -78,7 +78,7 @@ while i < consideredMeasurements:
     measurementsSepSensor.append(tempValue)
     i += 1
 
-averageSepSensorValue = tempValue
+averageSepSensorTemperature = tempValue
 
 # Heating routine
 print("Heating-Circuit software running...\n")
@@ -93,7 +93,7 @@ while True:
 
     # Include new seperate sensor measurement and calculate averageTemperature
     measurementsSepSensor[i] = readSepTempSensor()
-    averageSepSensorValue = averageValueFromList(measurementsSepSensor)
+    averageSepSensorTemperature = averageValueFromList(measurementsSepSensor)
 
     print("AverageSepSensorTemperature: ", averageSepSensorTemperature, "°C\n")
 
@@ -111,7 +111,7 @@ while True:
 
     # Turn the heating-cicuit on, if the average seperate sensor temperature sinks below the defined minimum temperature
     # There should be a ~3.3V difference between the GPIO-Pin and a Ground-Pin on the Pi-board
-    if averageSepSensorValue <= minSepSensorTemperature + temperatureOffsetSepSensor:
+    if averageSepSensorTemperature <= minSepSensorTemperature + temperatureOffsetSepSensor:
         gpioPin.on()
         print("Heating-Circuit on: minSepSensorTemperature\n")
     
@@ -123,7 +123,7 @@ while True:
 
     # Turn the heating-circuit off, if the average seperate sensor temperature rises above the defined deactivation temperature
     # There should be no or only a small voltage difference between the GPIO-Pin and a Ground-Pin on the Pi-board
-    if averageSepSensorValue >= maxSepSensorTemperature + temperatureOffsetSepSensor:
+    if averageSepSensorTemperature >= maxSepSensorTemperature + temperatureOffsetSepSensor:
         gpioPin.off()
         print("Heating-Circuit off: maxSepSensorTemperature\n")
 
