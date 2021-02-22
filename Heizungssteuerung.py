@@ -89,13 +89,13 @@ while True:
     measurementsSOC[i] = tempSensSOC.temperature
     averageSOCTemperature = averageValueFromList(measurementsSOC)
 
-    print("AverageSOCTemperature: " + averageSOCTemperature + "\n")
+    print("AverageSOCTemperature: ", averageSOCTemperature, "°C\n")
 
     # Include new seperate sensor measurement and calculate averageTemperature
     measurementsSepSensor[i] = readSepTempSensor()
     averageSepSensorValue = averageValueFromList(measurementsSepSensor)
 
-    print("AverageSepSensorTemperature: " + averageSepSensorTemperature + "\n")
+    print("AverageSepSensorTemperature: ", averageSepSensorTemperature, "°C\n")
 
     # Increase/reset i
     i += 1
