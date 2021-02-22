@@ -14,13 +14,13 @@ temperatureOffsetSOC        = 0                                                 
 
 usedPinNumber               = 17                                                                # Index of the GPIO-Pin to be used
 consideredMeasurements      = 10                                                                # Amount of measurements averaged in order to compensate for lacking precision/spikes
-measurementFrequency        = 1                                                                 # Amount of measurements per second (hertz)
+measurementFrequency        = 10                                                                # Amount of measurements per second (hertz)
                                                                                                 # The maximum reaction time (seconds) caused by the averaging logic can be calculated by: 
                                                                                                 # consideredMeasurements/measurementFrequency = reaction time
 
 sepTempSensorPath           = "/sys/bus/w1/devices/28-000009586bf6/w1_slave"                    # File path to w1_slave file of the seperate internal temperature sensor
-minSepSensorTemperature     = 0                                                                 # Seperately measured temperature threshold which triggers the heating-circuit (degrees Celcius)
-maxSepSensorTemperature     = 30                                                                # Seperately measured temperature at which the heating will be stopped (degrees Celcius)
+minSepSensorTemperature     = 30                                                                # Seperately measured temperature threshold which triggers the heating-circuit (degrees Celcius)
+maxSepSensorTemperature     = 40                                                                # Seperately measured temperature at which the heating will be stopped (degrees Celcius)
 temperatureOffsetSepSensor  = 0                                                                 # Adjust possible temperature offsets
 
 # Predefined functions
