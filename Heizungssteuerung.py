@@ -80,6 +80,8 @@ while i < consideredMeasurements:
 averageSepSensorValue = tempValue
 
 # Heating routine
+print("Heizungssoftware laeuft...\n")
+
 i = 0
 while True:
     # Include new SOC measurement and calculate averageTemperature
